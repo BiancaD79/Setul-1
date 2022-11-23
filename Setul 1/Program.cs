@@ -29,38 +29,6 @@ namespace Setul_1
         static void Main(string[] args)
         {
 
-            /*int n;
-            n = int.Parse(Console.ReadLine());
-            switch(n)
-            {
-                case 1: Console.WriteLine("Ianuarie"); break;
-                case 2: Console.WriteLine("Februarie"); break;
-                case 3: Console.WriteLine("Martie"); break;
-                case 4: Console.WriteLine("Aprilie"); break;
-                case 5: Console.WriteLine("Mai"); break;
-                case 6: Console.WriteLine("Iunie"); break;
-                case 7: Console.WriteLine("Iulie"); break;
-                case 8: Console.WriteLine("August"); break;
-                case 9: Console.WriteLine("Septembrie"); break;
-                case 10: Console.WriteLine("Octombrie"); break;
-                case 11: Console.WriteLine("Noiembrie"); break;
-                case 12: Console.WriteLine("Decembrie"); break;
-            }*/
-            /*int a, b, c;
-            string[] v = Console.ReadLine().Split();
-            a = int.Parse(v[0]);
-            b = int.Parse(v[1]);
-            c = int.Parse(v[2]);
-            int sca = a % 10 + a / 10;
-            int scb = b % 10 + b / 10;
-            int scc = c % 10 + c / 10;
-            int max = sca;
-            if (scb > max) max = scb;
-            if (scc > max) max = scc;
-            if (sca == max) Console.Write(a + " ");
-            if (scb == max) Console.Write(b + " ");
-            if (scc == max) Console.Write(c + " ");*/
-
             int prob, ok = 1;
             do
             {
@@ -87,27 +55,124 @@ namespace Setul_1
                         case 13: P13(); break;
                         case 14: P14(); break;
                         case 15: P15(); break;
-                            //case 16: P16(); break;
-                            //case 17: P17(); break;
-                            //case 18: P18(); break;
-                            //case 19: P19(); break;
-                            //case 20: P20(); break;
-                            //case 21: P21(); break;
+                        //case 16: P16(); break;
+                        case 17: P17(); break;
+                        case 18: P18(); break;
+                        case 19: P19(); break;
+                        //case 20: P20(); break;
+                        //case 21: P21(); break;
                     }
 
                 }
                 Console.Write("\nDoriti sa alegeti alta problema?: 0 - Nu, 1 - Da ");
                 ok = int.Parse(Console.ReadLine());
             } while (ok != 0);
-            Console.ReadKey();
+            
         }
+        
+        /// <summary>
+        /// Determinati daca un numar e format doar cu 2 cifre care se pot repeta. De ex. 23222 sau 9009000 sunt astfel de numere, pe cand 593 si 4022 nu sunt. 
+        /// </summary>
+        private static void P19()
+        {
+            int n,apar=0;
+            int[] v = new int[10];
+            Console.Write("Determinati daca un numar e format doar cu 2 cifre care se pot repeta.\nIntroduceti o valoare pentru n: ");
+            n = int.Parse(Console.ReadLine());
+            while (n != 0)
+            {
+                v[n % 10]++;
+                n = n / 10;
+            }
+            for (int i = 0; i < 10; i++)
+            {
+                if (v[i] != 0) apar++;
+            }
+            if (apar == 2) Console.WriteLine($"Numarul este format din 2 cifre care se repeta");
+            else Console.WriteLine($"Numarul NU este format din 2 cifre care se repeta");
+
+        }
+
+        /// <summary>
+        /// Afisati descompunerea in factori primi ai unui numar n.  De ex. pentru n = 1176 afisati 2^3 x 3^1 x 7^2. 
+        /// </summary>
+        private static void P18()
+        {
+            int n,d,p;
+            Console.Write("Afisati descompunerea in factori primi ai unui numar n.\nIntroduceti o valoare pentru n: ");
+            n = int.Parse(Console.ReadLine());
+            d = 2; p = 0;
+            while (n > 1)
+            {
+                p = 0;
+                while (n % d == 0)
+                {
+                    p++;
+                    n /= d;
+                }
+                if (p > 0)
+                    Console.Write($"{d}^{p} ");
+                d ++;
+                if (n > 1 && d * d > n)
+                {
+                    d = n;
+                }
+            }
+            Console.WriteLine();
+        }
+
+        /// <summary>
+        /// Determianti cel mai mare divizor comun si cel mai mic multiplu comun a doua numere. Folositi algoritmul lui Euclid. 
+        /// </summary>
+        private static void P17()
+        {
+            int a, b, gcd=0, lcm=0,x,y,a1,b1;
+            Console.Write("Determianti cel mai mare divizor comun si cel mai mic multiplu comun a doua numere.\nIntroduceti valorile pentru a si b: ");
+            string[] v = Console.ReadLine().Split();
+            a = int.Parse(v[0]);
+            b = int.Parse(v[1]);
+            a1 = a; b1 = b;
+            if (a < 0) a = -a;
+            if (b < 0) b = -b;
+            x = a; y = b;
+            while (x != y)
+            {
+                if (x > y) x = x - y;
+                else y = y - x;
+            }
+
+            /*while (x != 0)
+            {
+                r = y % x;
+                y = x;
+                x = r;
+            }*/
+
+            gcd = y;
+            if (a < 0) a = -a;
+            if (b < 0) b = -b;
+            lcm = a*b/gcd;
+            if (gcd == 1) Console.WriteLine($"{a1} si {b1} sunt prime intre ele, astfel cel mai mare divizor comun este 1, cel mai mic multiplu comun este: {lcm}");
+            else
+            Console.WriteLine($"Cel mai mare divizor comun a lui {a1} si {b1} este {gcd}, cel mai mic multiplu comun este: {lcm}");
+
+        }
+
+        /// <summary>
+        /// Se dau 5 numere. Sa se afiseze in ordine crescatoare.
+        /// </summary>
+        private static void P16()
+        {
+            
+        }
+
         /// <summary>
         /// Se dau 3 numere. Sa se afiseze in ordine crescatoare. 
         /// </summary>
         private static void P15()
         {
             int a, b, c, aux;
-            Console.Write("Ati ales problema 15. \nSe dau 3 numere. Sa se afiseze in ordine crescatoare.\nIntroduceti valorile pentru a,b si c:");
+            Console.Write("Se dau 3 numere. Sa se afiseze in ordine crescatoare.\nIntroduceti valorile pentru a,b si c:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
@@ -130,7 +195,7 @@ namespace Setul_1
                 b = c;
                 c = aux;
             }
-
+            Console.WriteLine($"{a} {b} {c}");
         }
 
         /// <summary>
@@ -140,7 +205,7 @@ namespace Setul_1
         {
             int n, inv = 0;
 
-            Console.Write("Ati ales problema 14. \nIntroduceti o valoare pentru n :");
+            Console.Write("Determianti daca un numar n este palindrom.\nIntroduceti o valoare pentru n :");
             n = int.Parse(Console.ReadLine());
             inv = inversa(n);
             if (n == inv)
@@ -155,7 +220,7 @@ namespace Setul_1
         private static void P13()
         {
             int a, b, nr = 0;
-            Console.Write("Ati ales problema 13. \nIntroduceti primul si al doilea an:");
+            Console.Write("Determianti cati ani bisecti sunt intre anii y1 si y2.\nIntroduceti primul si al doilea an:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
@@ -173,7 +238,7 @@ namespace Setul_1
         private static void P12()
         {
             int a, b, n, nrdiv = 0;
-            Console.Write("Ati ales problema 12. \nIntroduceti valorile pentru n, a si b:");
+            Console.Write("Determinati cate numere intregi divizibile cu n se afla in intervalul [a, b]. \nIntroduceti valorile pentru n, a si b:");
             string[] v = Console.ReadLine().Split();
             n = int.Parse(v[0]);
             a = int.Parse(v[1]);
@@ -192,7 +257,7 @@ namespace Setul_1
         {
             int n, inv = 0;
 
-            Console.Write("Ati ales problema 11. \nIntroduceti o valoare pentru n :");
+            Console.Write("Afisati in ordine inversa cifrele unui numar n. \nIntroduceti o valoare pentru n :");
             n = int.Parse(Console.ReadLine());
             Console.Write($"Ordinea inversa a lui {n} este ");
             inv = inversa(n);
@@ -206,7 +271,7 @@ namespace Setul_1
         {
             int n;
 
-            Console.Write("Ati ales problema 10. \nIntroduceti o valoare pentru n :");
+            Console.Write("Determinati daca un numar n este prim.. \nIntroduceti o valoare pentru n :");
             n = int.Parse(Console.ReadLine());
             if (n == 1 || n == 0) Console.Write($"{n} nu este prim");
             if (n == 2) Console.Write($"{2} este prim");
@@ -225,7 +290,7 @@ namespace Setul_1
         {
             int n;
 
-            Console.Write("Ati ales problema 9. \nIntroduceti valorile pentru n :");
+            Console.Write("Afisati toti divizorii numarului n.  \nIntroduceti valorile pentru n :");
             n = int.Parse(Console.ReadLine());
             Console.Write($"Divizorii lui {n} sunt:1 ");
             for (int i = 2; i <= n; i++)
@@ -242,7 +307,7 @@ namespace Setul_1
         private static void P8()
         {
             int a, b;
-            Console.Write("Ati ales problema 8. \nIntroduceti valorile pentru a si b:");
+            Console.Write("Inversarea lui a si b (restrictionat) \nIntroduceti valorile pentru a si b:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
@@ -257,7 +322,7 @@ namespace Setul_1
         private static void P7()
         {
             int a, b, aux;
-            Console.Write("Ati ales problema 7. \nIntroduceti valorile pentru a si b:");
+            Console.Write("Inversarea lui a si b  \nIntroduceti valorile pentru a si b:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
@@ -270,12 +335,12 @@ namespace Setul_1
 
 
         /// <summary>
-        /// Detreminati daca trei numere pozitive a, b si c pot fi lungimile laturilor unui triunghi. 
+        /// Determinati daca trei numere pozitive a, b si c pot fi lungimile laturilor unui triunghi. 
         /// </summary>
         private static void P6()
         {
             int a, b, c;
-            Console.Write("Ati ales problema 6. \nIntroduceti valorile pentru a,b si c:");
+            Console.Write("Determinati daca trei numere pozitive a, b si c pot fi lungimile laturilor unui triunghi.  \nIntroduceti valorile pentru a,b si c:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
@@ -292,7 +357,7 @@ namespace Setul_1
         private static void P5()
         {
             int n, k, i, cif = -1, n1;
-            Console.Write("Ati ales problema 5. \nIntroduceti valorile pentru n si k:");
+            Console.Write("Extrage si afiseaza a k-a cifra de la sfarsitul unui numar. \nIntroduceti valorile pentru n si k:");
             string[] v = Console.ReadLine().Split();
             n = int.Parse(v[0]);
             n1 = n;
@@ -313,13 +378,13 @@ namespace Setul_1
         }
 
         /// <summary>
-        /// Detremina daca un an y este an bisect. 
+        /// Determina daca un an y este an bisect. 
         /// </summary>
         private static void P4()
         {
             int y;
 
-            Console.Write("Ati ales problema 4. \nIntroduceti valoarea pentru y:");
+            Console.Write("Determina daca un an y este an bisect.  \nIntroduceti valoarea pentru y:");
             string[] v = Console.ReadLine().Split();
             y = int.Parse(v[0]);
             if ((y % 4 == 0 && y % 100 != 0) || y % 400 == 0)
@@ -335,7 +400,7 @@ namespace Setul_1
         {
             int n, k;
 
-            Console.Write("Ati ales problema 3. \nIntroduceti valorile pentru n si k:");
+            Console.Write("Determina daca n se divide cu k, unde n si k sunt date de intrare.  \nIntroduceti valorile pentru n si k:");
             string[] v = Console.ReadLine().Split();
             n = int.Parse(v[0]);
             k = int.Parse(v[1]);
@@ -352,7 +417,7 @@ namespace Setul_1
         {
             double a, b, c, x1, x2, delta, xreal, ximaginar;
 
-            Console.Write("Ati ales problema 2. \nIntroduceti valorile pentru a, b si c:");
+            Console.Write("Se rezolva o ecuatie de gradul 2 cu o necunoscuta: ax^2 + bx + c = 0 \nIntroduceti valorile pentru a, b si c:");
             string[] v = Console.ReadLine().Split();
             a = double.Parse(v[0]);
             b = double.Parse(v[1]);
@@ -393,7 +458,7 @@ namespace Setul_1
         {
             int a, b, x;
 
-            Console.Write("Ati ales problema 1. \nIntroduceti valorile pentru a si b:");
+            Console.Write("Se rezolva o ecuatie de gradul 1 cu o necunoscuta: ax+b = 0 \nIntroduceti valorile pentru a si b:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
