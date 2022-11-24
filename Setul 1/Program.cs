@@ -55,12 +55,12 @@ namespace Setul_1
                         case 13: P13(); break;
                         case 14: P14(); break;
                         case 15: P15(); break;
-                        //case 16: P16(); break;
+                        case 16: P16(); break;
                         case 17: P17(); break;
                         case 18: P18(); break;
                         case 19: P19(); break;
-                        //case 20: P20(); break;
-                        //case 21: P21(); break;
+                        case 20: P20(); break;
+                        case 21: P21(); break;
                     }
 
                 }
@@ -69,7 +69,103 @@ namespace Setul_1
             } while (ok != 0);
             
         }
-        
+        /// <summary>
+        /// Ghiciti un numar intre 1 si 1024 prin intrebari de forma "numarul este mai mare sau egal decat x?". 
+        /// </summary>
+        private static void P21()
+        {
+            Console.WriteLine("Ganditi-va la un numar intre 1 si 1024");
+            int st=1, dr=1024, mij=(st+dr)/2, raspuns, pas=0;
+            
+            bool ghicit = false;
+            do
+            {
+                Console.WriteLine($"Numarul este mai mare sau egal cu {mij}? 0 - Nu, 1 - Da");
+                pas++;
+                raspuns =int.Parse(Console.ReadLine());
+                if(raspuns == 0)
+                {
+                    dr = mij;
+                    mij = (st + dr)/2;
+                }
+                else
+                {
+                    Console.WriteLine($"Numarul este egal cu {mij}? 0 - Nu, 1 - Da");
+                    pas++;
+                    raspuns = int.Parse(Console.ReadLine());
+                    if (raspuns == 0)
+                    {
+                        st = mij;
+                        mij = (st + dr) / 2;
+                    }
+                    else
+                        ghicit = true;  
+                    
+                }
+                
+            }while(!ghicit && st < dr);
+
+            Console.WriteLine($"Numarul la care v-ati gandit a fost {mij}!. A fost ghicit din {pas} intrebari.");
+        }
+
+        /// <summary>
+        /// Afisati fractia m/n in format zecimal, cu perioada intre paranteze (daca e cazul). Exemplu: 13/30 = 0.4(3).
+        /// </summary>
+        private static void P20()
+        {
+            Console.Write("Afisati fractia m/n in format zecimal\nIntroduceti valorile pentru n si m:");
+            string[] v = Console.ReadLine().Split();
+            int m, n;
+            m = int.Parse(v[0]);
+            n = int.Parse(v[1]);
+
+            int parteInt, parteFract;
+            parteInt = m / n; 
+            parteFract = m % n; 
+            Console.Write($"{parteInt},");
+            int cifra, rest;
+            List<int> resturi = new List<int>();
+            List<int> cifre = new List<int>();
+            resturi.Add(parteFract);
+            bool periodic = false;
+            do
+            {
+                cifra = parteFract * 10 / n;
+                cifre.Add(cifra);
+                rest = parteFract * 10 % n;
+                if (!resturi.Contains(rest))
+                {
+                    resturi.Add(rest);
+                }
+                else
+                {
+                    periodic = true;
+                    break;
+                }
+                parteFract = rest;
+            } while (rest != 0);
+
+            if (!periodic)
+            {
+                foreach (var item in cifre)
+                {
+                    Console.Write(item);
+                }
+            }
+            else
+            {
+                for (int i = 0; i < resturi.Count; i++)
+                {
+                    if (resturi[i] == rest)
+                    {
+                        Console.Write("(");
+                    }
+                    Console.Write(cifre[i]);
+                }
+                Console.WriteLine(")");
+            }
+        }
+
         /// <summary>
         /// Determinati daca un numar e format doar cu 2 cifre care se pot repeta. De ex. 23222 sau 9009000 sunt astfel de numere, pe cand 593 si 4022 nu sunt. 
         /// </summary>
@@ -126,7 +222,7 @@ namespace Setul_1
         /// </summary>
         private static void P17()
         {
-            int a, b, gcd=0, lcm=0,x,y,a1,b1;
+            int a, b, gcd, lcm,x,y,a1,b1;
             Console.Write("Determianti cel mai mare divizor comun si cel mai mic multiplu comun a doua numere.\nIntroduceti valorile pentru a si b: ");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
@@ -163,7 +259,27 @@ namespace Setul_1
         /// </summary>
         private static void P16()
         {
-            
+            int a, b, c, d, e,aux;
+            Console.WriteLine("Se dau 5 numere. Sa se afiseze in ordine crescatoare.\nIntroduceti cele 5 valori:");
+            Console.Write("1="); a =int.Parse(Console.ReadLine());
+            Console.Write("2="); b = int.Parse(Console.ReadLine());
+            Console.Write("3="); c = int.Parse(Console.ReadLine());
+            Console.Write("4="); d = int.Parse(Console.ReadLine());
+            Console.Write("5="); e = int.Parse(Console.ReadLine());
+            if (a > b) { aux = a; a = b; b = aux; }
+            if (a > c) { aux = a; a = c; c = aux; }
+            if (a > d) { aux = a; a = d; d = aux; }
+            if (a > e) { aux = a; a = e; e = aux; }
+
+            if (b > c) { aux = b; b = c; c = aux; }
+            if (b > d) { aux = b; b = d; d = aux; }
+            if (b > e) { aux = b; b = e; e = aux; }
+
+            if (c > d) { aux = c; c = d; d = aux; }
+            if (c > e) { aux = c; c = e; e = aux; }
+
+            if (d > e) { aux = d; d = e; e = aux; }
+            Console.WriteLine($"{a} {b} {c} {d} {e}");
         }
 
         /// <summary>
