@@ -540,7 +540,7 @@ namespace Setul_1
             c = double.Parse(v[2]);
             delta = b * b - 4 * a * c;
             if (a == 0)
-                Console.WriteLine("Asta nu e ecuatie de gradul 2!");
+                Console.WriteLine("Nu e ecuatie de gradul 2!");
             else
             {
                 if (delta > 0)
@@ -572,17 +572,17 @@ namespace Setul_1
         /// </summary>
         private static void P1()
         {
-            int a, b, x;
-
+            int a, b;
+            float x;
             Console.Write("Se rezolva o ecuatie de gradul 1 cu o necunoscuta: ax+b = 0 \nIntroduceti valorile pentru a si b:");
             string[] v = Console.ReadLine().Split();
             a = int.Parse(v[0]);
             b = int.Parse(v[1]);
-            x = -b / a;
-            if ((x * a + b) == 0)
+            x = (float)-b /(float) a;
+            //if ((x * a + b) == 0)
                 Console.WriteLine($"Rezolvarea lui x pentru ecuatia {a}x + {b} = 0 este: {x}");
-            else
-                Console.WriteLine($"Rezolvarea lui x pentru ecuatia {a}x + {b} = 0 este: -{b}/{a}");
+            //else
+                //Console.WriteLine($"Rezolvarea lui x pentru ecuatia {a}x + {b} = 0 este: -{b}/{a}");
 
         }
 
